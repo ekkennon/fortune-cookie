@@ -15,10 +15,12 @@
 # limitations under the License.
 #
 import webapp2
+import random
 
 class MainHandler(webapp2.RequestHandler):
     def get(self):
-        self.response.write('Hello world!!!')
+    	lucky_num = random.randint(1,100)
+        self.response.write('Your lucky number: ' + str(lucky_num))
 
 app = webapp2.WSGIApplication([
     ('/', MainHandler)
