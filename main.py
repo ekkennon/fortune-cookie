@@ -17,11 +17,33 @@
 import webapp2
 import random
 
+def getRandomFortune():
+	fortunes = [
+		"I see much code in your future.",
+		"Consider eating more fortune cookies.",
+		"You have tamed the mighty python, now you must free it onto the great spider's web."
+		]
+	
+	return fortunes[random.randint(0,2)]
+
 class MainHandler(webapp2.RequestHandler):
     def get(self):
-    	lucky_num = random.randint(1,100)
-        self.response.write('Your lucky number: ' + str(lucky_num))
+    	header = "<h1>Fortune Cookie</h1>"
 
-app = webapp2.WSGIApplication([
+    	fortune_sentence = "Your fortune: <strong>" + getRandomFortune() + "</strong>"
+    	fortune_paragraph = "<p>" + fortune_sentence + "</p>"
+
+    	number_sentence = 'Your lucky number: <strong>' + str(random.randint(1,100)) + '</strong>'
+    	number_paragraph = "<p>" + number_sentence + "</p>"
+
+    	btn_refresher = '<a href="."><button>Another Cookie Please</button></a>'
+
+    	content = header + fortune_paragraph + number_paragraph + btn_refresher
+
+        self.response.write(content)
+
+routes = [
     ('/', MainHandler)
-], debug=True)
+]
+
+app = webapp2.WSGIApplication(routes, debug=True)
