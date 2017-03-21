@@ -24,7 +24,7 @@ def getRandomFortune():
 		"You have tamed the mighty python, now you must free it onto the great spider's web."
 		]
 	
-	return fortunes[random.randint(0,2)]
+	return fortunes[random.randint(0,len(fortunes)-1)]
 
 class MainHandler(webapp2.RequestHandler):
     def get(self):
